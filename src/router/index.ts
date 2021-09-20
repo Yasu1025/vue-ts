@@ -1,10 +1,20 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import Register from '@/pages/Register.vue';
+import Wrapper from '@/pages/Wrapper.vue';
 import Dashboard from "@/pages/Dashuboard.vue";
 import Users from '@/pages/Users.vue';
 
 const routes: Array<RouteRecordRaw> = [
-  { path: '', component: Dashboard},
-  { path: '/users', component: Users}
+  { path: '/register', component: Register},
+
+  {
+    path: '',
+    component: Wrapper,
+    children: [
+      { path: '', component: Dashboard},
+      { path: '/users', component: Users}
+    ]
+  },
 ]
 
 const router = createRouter({
