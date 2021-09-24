@@ -1,7 +1,7 @@
 <template>
   <main class="text-center">
     <form class="form-signin" @submit.prevent="onSubmit">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
       <input v-model="firstName" class="form-control" placeholder="First Name" required>
       <input v-model="lastName" class="form-control" placeholder="Last Name" required>
       <input v-model="email" type="email" class="form-control" placeholder="Email address" required>
@@ -29,7 +29,7 @@ export default {
     const router = useRouter();
 
     const onSubmit = async () => {  
-      await axios.post( 'http://localhost:8000/api/register', {
+      await axios.post( 'register', {
         first_name: firstName.value,
         last_name: lastName.value,
         email: email.value,
