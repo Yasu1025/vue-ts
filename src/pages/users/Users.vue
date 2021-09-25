@@ -16,28 +16,72 @@
           <td>{{ `${user.first_name} ${user.last_name}`}}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.role.name }}</td>
-          <td></td>
+          <td>
+            <div class="btn-group mr-2">
+              <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary" @click="onDelete(user.id)">Delete</a>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <nav>
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" @click="onPrev">Prev</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0)" @click="onNext">Next</a>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script lang="ts">
-import { onMounted, ref } from '@vue/runtime-core';
+import { onMounted, ref, watch } from '@vue/runtime-core';
 import axios from 'axios';
+import { User } from '../../models/user';
 export default {
   name: "users",
   setup() {
     const users = ref([]);
-
-    onMounted( async () => {
-      const { data } = await axios.get('users');
+    const page = ref(1);
+    const lastPage = ref(0);
+    const load = async () => {
+      const { data } = await axios.get(`users?page=${page.value}`);
       users.value = data.data;
-    });
+      lastPage.value = data.meta.last_page
+    }
+
+    onMounted( load );
+
+    watch(page, load)
+
+    const onPrev = () => {
+      if(page.value > 1) {
+        page.value--;
+      }
+    }
+
+    const onNext = () => {
+      if(page.value < lastPage.value) {
+        page.value++;
+      }
+    }
+
+    const onDelete = async (userId: number) => {
+      if(confirm('Are you sure?')) {
+        await axios.delete(`users/${userId}`);
+        users.value = users.value.filter((u: User) => u.id !== userId )
+      }
+    }
 
     return {
-      users
+      users,
+      onPrev,
+      onNext,
+      onDelete
     }
   }
 };
