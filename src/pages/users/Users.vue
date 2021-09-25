@@ -2,7 +2,7 @@
   <div class="pt-3 pb-2 mb-3 border-bottom">
     <router-link to="/users/create" class="btn btn-sm btn-outline-secondary">Add</router-link>
   </div>
-  
+
   <div class="table-responsive">
     <table class="table table-striped table-sm">
       <thead>
@@ -22,6 +22,7 @@
           <td>{{ user.role.name }}</td>
           <td>
             <div class="btn-group mr-2">
+              <router-link :to="`/users/${user.id}/edit`" class="btn btn-sm btn-outline-secondary">Edit</router-link>
               <a href="javascript:void(0)" class="btn btn-sm btn-outline-secondary" @click="onDelete(user.id)">Delete</a>
             </div>
           </td>
