@@ -12,9 +12,14 @@
             Users
           </router-link>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
           <router-link to="/roles" active-class="active" class="nav-link" href="#">
             Roles
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/products" active-class="active" class="nav-link" href="#">
+            Products
           </router-link>
         </li>
       </ul>
