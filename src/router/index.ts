@@ -3,6 +3,7 @@ import Register from '@/pages/Register.vue';
 import Login from '@/pages/Login.vue';
 import Wrapper from '@/pages/Wrapper.vue';
 import Dashboard from "@/pages/Dashuboard.vue";
+import Profile from "@/pages/Profile.vue";
 import Users from '@/pages/users/Users.vue';
 import UserCreate from '@/pages/users/UserCreate.vue';
 import UserEdit from '@/pages/users/UserEdit.vue';
@@ -23,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Wrapper,
     children: [
       { path: '', component: Dashboard},
+      { path: '/profile', component: Profile},
       { path: '/users', component: Users},
       { path: '/users/create', component: UserCreate},
       { path: '/users/:id/edit', component: UserEdit},

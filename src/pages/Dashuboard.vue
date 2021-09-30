@@ -1,4 +1,5 @@
 <template>
+  <h2>daily Sales</h2>
   <div>
     dashboard
   </div>

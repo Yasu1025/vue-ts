@@ -23,7 +23,7 @@ export default {
       required: true
     }
   },
-  setup(props: { lastPage: number }, ctx: SetupContext) {
+  setup(props: any, ctx: SetupContext) {
     const page = ref(1);
     watch(page, () => {
       ctx.emit('page-changed', page.value)
