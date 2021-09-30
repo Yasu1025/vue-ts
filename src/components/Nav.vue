@@ -10,18 +10,19 @@
 </template>
 
 <script>
-import { onMounted, ref } from '@vue/runtime-core';
+import { computed, ref, watch } from '@vue/runtime-core';
 import axios from 'axios';
+import { useStore } from 'vuex';
 export default {
   name: "nav",
   setup() {
-
+    const store = useStore();
     const name = ref('');
+    const user = computed(() => store.state.user);
 
-    onMounted(async () => {
-      const { data } = await axios.get('user');
-      name.value = `${data.first_name} ${data.last_name}`;
-    });
+    watch(user, () => {
+      name.value = `${user.value.first_name} ${user.value.last_name}`
+    })
 
     const logout = async () => {
       await axios.post('logout')

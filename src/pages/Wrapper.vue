@@ -18,6 +18,7 @@ import Menu from "@/components/Menu.vue";
 import axios from 'axios';
 import { onMounted } from '@vue/runtime-core';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 export default {
   name: 'wrapper',
@@ -28,9 +29,12 @@ export default {
   setup() {
     onMounted(async () => {
       const router = useRouter();
+      const store = useStore();
+
+
       try {
         const { data } = await axios.get('user');
-        console.log(data)
+        store.dispatch('setUser', data);
       } catch (e) {
         await router.push('/login');
       }
